@@ -1,0 +1,16 @@
+from django.urls import path
+from django.conf import settings
+from . import views
+from django.conf.urls.static import static
+
+app_name = 'clients'
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('search',views.search, name='search'),
+    path('addclient',views.addclient, name='addclient'),
+    path('processaddclient',views.processaddclient, name='processaddclient'),
+    path('<int:profile_id>/clientdetail/',views.clientdetail, name='clientdetail'),
+    path('<int:profile_id>/clientdelete/',views.clientdelete, name='clientdelete'),
+    path('<int:profile_id>/clientedit/',views.clientedit, name='clientedit'),
+    path('<int:profile_id>/processclientedit/',views.processclientedit, name='processclientedit'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
