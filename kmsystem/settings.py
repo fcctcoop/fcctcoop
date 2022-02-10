@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm$mb2co&r7xz4e(trmb#l+p^bo-fm-*a=r_mo2tik+#hq8(yh@'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'some_random_default_string')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -147,6 +150,12 @@ DATE_INPUT_FORMATS = ['%Y-%m-%d']
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.User'
+
+STATICFILES_DIRS    =   [
+            BASE_DIR.joinpath('static')
+]
+
+STATIC_ROOT =   '/var/www/fcctcoop/static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
